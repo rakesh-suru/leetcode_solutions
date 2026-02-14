@@ -1,0 +1,17 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        length = len(nums)
+
+        def check_perms(curr):
+            if curr == length:
+                ans.append(nums[:])
+                return
+
+            for i in range(curr, length):
+                nums[curr], nums[i] = nums[i], nums[curr]
+                check_perms(curr + 1)
+                nums[curr], nums[i] = nums[i], nums[curr]
+
+        check_perms(0)
+        return ans

@@ -1,0 +1,26 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        def findCombi(i, target, arr):
+            
+            if i == len(candidates):
+                if target == 0:
+                    res = sorted(arr[:])
+                    if res not in ans:
+                        ans.append(arr[:])
+                return
+            
+            curr = -1
+            for j in range(i, n):
+                if curr != candidates[j] and candidates[j] <= target:
+                    curr = candidates[j]
+                    arr.append(candidates[j])
+                    findCombi(i + 1, target - candidates[j], arr)
+                    arr.pop()
+            
+            findCombi(i + 1, target, arr)
+        
+        ans = []
+        n = len(candidates)
+        candidates.sort()
+        findCombi(0, target, [])
+        return ans

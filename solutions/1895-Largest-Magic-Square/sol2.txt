@@ -1,0 +1,23 @@
+class Solution:
+    def largestMagicSquare(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+
+        def isMagic(x, y, k):
+            target = sum(grid[x][y:y+k])
+
+            for i in range(k):
+                if sum(grid[x+i][y:y+k]) != target:
+                    return False
+                if sum(grid[x+j][y+i] for j in range(k)) != target:
+                    return False
+
+            d1 = sum(grid[x+i][y+i] for i in range(k))
+            d2 = sum(grid[x+i][y+k-1-i] for i in range(k))
+            return d1 == target and d2 == target
+
+        for k in range(min(m, n), 1, -1):
+            for i in range(m - k + 1):
+                for j in range(n - k + 1):
+                    if isMagic(i, j, k):
+                        return k
+        return 1

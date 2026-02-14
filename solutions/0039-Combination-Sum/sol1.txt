@@ -1,0 +1,19 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def findCombi(i, target, arr):
+            if i == len(candidates):
+                if target == 0:
+                    ans.append(arr[:])
+                return
+
+            if candidates[i] <= target:
+                arr.append(candidates[i])
+                findCombi(i, target - candidates[i], arr)
+                arr.pop()
+            
+            findCombi(i + 1, target, arr)
+        
+        ans = []
+        temp = []
+        findCombi(0, target, temp)
+        return ans

@@ -1,0 +1,20 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        def check_perms(temp, check):
+            if len(temp) == length:
+                ans.append(temp[:])
+                return
+            for i in range(length):
+                if check[i] == 0:
+                    temp.append(nums[i])
+                    check[i] = 1
+                    check_perms(temp, check)
+                    check[i] = 0
+                    temp.pop()
+        
+        temp = []
+        length = len(nums)
+        check = [0] * length
+        check_perms(temp, check)
+        return ans

@@ -1,0 +1,21 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        def findCombi(i, target, arr):
+            
+            if i == len(candidates):
+                if target == 0:
+                    res = sorted(arr[:])
+                    if res not in ans:
+                        ans.append(res)
+                return
+            
+            if candidates[i] <= target:
+                arr.append(candidates[i])
+                findCombi(i + 1, target - candidates[i], arr)
+                arr.pop()
+            
+            findCombi(i + 1, target, arr)
+        
+        ans = []
+        findCombi(0, target, [])
+        return ans

@@ -1,0 +1,24 @@
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        freq = Counter(s)
+        seen = set()
+        res = []
+        size = 0
+
+        for ch in s:
+            freq[ch] -= 1
+            seen.add(ch)
+            size += 1
+
+            done = True
+            for c in seen:
+                if freq[c] > 0:
+                    done = False
+                    break
+            
+            if done:
+                res.append(size)
+                size = 0
+                seen.clear()
+        
+        return res

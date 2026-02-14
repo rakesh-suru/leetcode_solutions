@@ -1,0 +1,21 @@
+class Solution:
+    def concatHex36(self, n: int) -> str:
+        digits16 = "0123456789ABCDEF"
+        digits36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        def to_base(num, base, digits):
+            if num == 0:
+                return "0"
+            res = ""
+            while num > 0:
+                res = digits[num % base] + res
+                num = num// base
+            return res
+
+        n2 = n * n
+        n3 = n * n * n
+
+        hex_part = to_base(n2, 16, digits16)
+        hex36_part = to_base(n3, 36, digits36)
+
+        return hex_part + hex36_part
