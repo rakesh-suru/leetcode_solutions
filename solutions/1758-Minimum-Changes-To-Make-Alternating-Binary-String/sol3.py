@@ -1,0 +1,9 @@
+class Solution:
+    def minOperations(self, s: str) -> int:
+        cnt = 0
+
+        for i in range(len(s)):
+            if int(s[i]) != i % 2:
+                cnt += 1
+
+        return min(cnt, len(s) - cnt)
